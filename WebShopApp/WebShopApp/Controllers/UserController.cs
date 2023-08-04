@@ -7,6 +7,7 @@ using WebShopApp.Authorization;
 using WebShopApp_Business;
 using WebShopApp_Data.Models;
 using WebShopApp_Business.DTO;
+using WebShopApp_Business.Service;
 
 namespace WebShopApp.Controllers
 {
@@ -54,9 +55,9 @@ namespace WebShopApp.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public User RegisterUser(User user)
+        public User RegisterUser(UserDTO user)
         {
-            return _userService.RegisterUser(user);
+            return _userService.RegisterUser(DTOMapper.UserDTO_To_User(user));
         }
 
         [HttpPut]

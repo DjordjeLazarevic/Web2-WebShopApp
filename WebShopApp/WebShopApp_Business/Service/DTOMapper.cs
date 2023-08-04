@@ -42,7 +42,8 @@ namespace WebShopApp_Business.Service
                 articleDto.Price,
                 articleDto.Quantity,
                 articleDto.Description,
-                articleDto.Image);
+                articleDto.Image
+                );
         }
 
         public static Article ArticleDTO_to_Article(ArticleDTO articleDto)
@@ -53,7 +54,8 @@ namespace WebShopApp_Business.Service
                 articleDto.Price,
                 articleDto.Quantity,
                 articleDto.Description,
-                articleDto.Image);
+                articleDto.Image
+                );
         }
 
         public static User UserDTO_To_User(UserDTO userDto)
@@ -107,12 +109,12 @@ namespace WebShopApp_Business.Service
             return new Order(
                 orderDto.CustomerId,
                 List_ArticleDTO_to_ArticleForOrder(orderDto.Articles),
-                new DateTime(),
-                new DateTime().AddHours(3), //TO DO: random amount of time > 1h
+                DateTime.Now,
+                DateTime.Now.AddHours(3), //TO DO: random amount of time > 1h
                 orderDto.Comment,
                 orderDto.Address,
                 orderDto.Price
-                ); ;
+                );
         }
 
         public static OrderResponseDTO Order_To_OrderResponseDTO(Order order)
@@ -125,7 +127,7 @@ namespace WebShopApp_Business.Service
                 order.Comment,
                 order.Address,
                 order.Price
-                ); ;
+                );
         }
 
         public static List<ArticleForOrder> List_ArticleDTO_to_ArticleForOrder(List<ArticleDTO> articlesDto)
