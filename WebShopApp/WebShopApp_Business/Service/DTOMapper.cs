@@ -22,7 +22,7 @@ namespace WebShopApp_Business.Service
                 article.Image);
         }
 
-        public static ArticleDTO ArticleForOrder_To_ArticleDTO(ArticleForOrder article)
+        public static ArticleDTO c(ArticleForOrder article)
         {
             return new ArticleDTO(
                 article.OriginalArticleId,
@@ -36,8 +36,8 @@ namespace WebShopApp_Business.Service
         public static ArticleForOrder ArticleDTO_to_ArticleForOrder(ArticleDTO articleDto)
         {
             return new ArticleForOrder(
-                articleDto.Id,
                 articleDto.SalesmanId,
+                articleDto.Id,
                 articleDto.Name,
                 articleDto.Price,
                 articleDto.Quantity,
@@ -113,7 +113,8 @@ namespace WebShopApp_Business.Service
                 DateTime.Now.AddHours(3), //TO DO: random amount of time > 1h
                 orderDto.Comment,
                 orderDto.Address,
-                orderDto.Price
+                orderDto.Price,
+                OrderStatus.Processing
                 );
         }
 
@@ -126,7 +127,8 @@ namespace WebShopApp_Business.Service
                 order.EndTime.ToShortTimeString(),
                 order.Comment,
                 order.Address,
-                order.Price
+                order.Price,
+                order.Status
                 );
         }
 
@@ -148,6 +150,26 @@ namespace WebShopApp_Business.Service
                 articlesDto.Add(ArticleForOrder_To_ArticleDTO(article));
             }
             return articlesDto;
+        }
+
+        public static List<ArticleDTO> List_Article_to_ArticleDTO(List<Article> articles)
+        {
+            List<ArticleDTO> articlesDto = new List<ArticleDTO>();
+            foreach (Article article in articles)
+            {
+                articlesDto.Add(Article_To_ArticleDTO(article));
+            }
+            return articlesDto;
+        }
+
+        public static List<UserDTO> List_User_to_UserDTO(List<User> users)
+        {
+            List<UserDTO> usersDto = new List<UserDTO>();
+            foreach (User user in users)
+            {
+                usersDto.Add(User_To_UserDTO_Safe(user));
+            }
+            return usersDto;
         }
     }
 }
