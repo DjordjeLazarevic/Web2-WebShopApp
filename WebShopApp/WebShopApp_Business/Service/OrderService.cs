@@ -25,6 +25,19 @@ namespace WebShopApp_Business.Service
             return _orderRepository.Insert(order);
         }
 
+        public void Delete(int id)
+        {
+            Order o = _orderRepository.GetByIdWithArticles(id);
+            foreach (ArticleForOrder article in o.Articles) 
+            {
+                Article a = _articleRepository.GetById(article.OriginalArticleId);
+                a.Quantity += article.Quantity;
+                _articleRepository.Update(a);
+            }
+            o.Status = OrderStatus.Cancelled;
+            _orderRepository.Update(o);
+        }
+
         public IEnumerable<Order> GetAll()
         {
             return _orderRepository.GetAll();
@@ -50,5 +63,16 @@ namespace WebShopApp_Business.Service
                 _articleRepository.Update(article);
             }
         }
+
+        public IEnumerable<Order> GetAllCustomerOrders(int id)
+        {
+            return _orderRepository.GetAllCustomerOrders(id);
+        }
+
+        public IEnumerable<Order> GetAllWithArticles()
+        {
+            return _orderRepository.GetAllWithArticles();
+        }
+
     }
 }
