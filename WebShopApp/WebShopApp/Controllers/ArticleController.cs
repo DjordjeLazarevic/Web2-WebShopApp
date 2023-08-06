@@ -30,12 +30,18 @@ namespace WebShopApp.Controllers
 
         // GET api/<ArticleController>/5
         [HttpGet("{id}")]
-        public ArticleDTO GetById(int id)
+        public IActionResult GetById(int id)
         {
-            return DTOMapper.Article_To_ArticleDTO(_articleService.GetById(id));
+            try
+            {
+                return Ok(DTOMapper.List_Article_to_ArticleDTO(_articleService.GetAll().Where(a => a.SalesmanId == id).ToList()));
+            }
+            catch
+            {
+                return BadRequest("Something went wrong.");
+            }
         }
 
-        // POST api/<ArticleController>
         [HttpPost]
         public IActionResult Post([FromBody] ArticleDTO value)
         {
@@ -46,7 +52,7 @@ namespace WebShopApp.Controllers
             }
             catch
             {
-                return BadRequest();
+                return BadRequest("Something went wrong");
 
             }
         }
