@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import ArticleDTO from "../../DTO/ArticleDTO";
-import Articles from "../Articles";
+import Articles from "../Article/Articles";
 import { BsFillCartFill } from "react-icons/bs";
 import Order from "../../model/Order";
 import orderService from "../../services/order-service";

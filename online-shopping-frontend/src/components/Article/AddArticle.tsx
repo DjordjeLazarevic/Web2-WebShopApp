@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { MdOutlineAddCircle } from "react-icons/md";
 import { RiEditCircleFill } from "react-icons/ri";
-import Articles from "../Articles";
+import Articles from "./Articles";
 import ArticleDTO from "../../DTO/ArticleDTO";
 import articleService from "../../services/article-service";
 import Swal from "sweetalert2";

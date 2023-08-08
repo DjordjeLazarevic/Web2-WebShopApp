@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import { FaUserPlus, FaUserAlt } from "react-icons/fa";
+import { RiLoginBoxFill } from "react-icons/ri";
 
 const Layout = () => {
   const [isCustomer, setIsCustomer] = useState(false);
@@ -75,69 +77,89 @@ const Layout = () => {
 
   return (
     <>
-      <nav className="navbar sticky-top navbar-expand-sm navbar-dark bg-primary">
-        <div className="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul className="navbar-nav">
+      <nav className="navbar sticky-top navbar-expand-sm bg-body-tertiary navbar-dark bg-dark">
+        <div
+          className="collapse navbar-collapse"
+          id="navbarNavDropdown"
+          style={{ display: "inline-block" }}
+        >
+          <ul className="navbar-nav text-center">
             {!isLoggedIn && (
               <li className="nav-item">
                 <Link className="nav-link" to="/">
-                  <b className="text-light">Register</b>
+                  <div className="row">
+                    <div className="col">
+                      <b className="text-light">Registration</b>
+                    </div>
+                    <div className="col">
+                      <FaUserPlus size="25" color="#5cb85c" />
+                    </div>
+                  </div>
                 </Link>
               </li>
             )}
             {!isLoggedIn && (
               <li className="nav-item">
                 <Link className="nav-link" to="/login">
-                  <b className="text-light">Log In</b>
+                  <div className="row">
+                    <div className="col">
+                      <b className="text-light">Login</b>
+                    </div>
+                    <div className="col">
+                      <RiLoginBoxFill
+                        size="25"
+                        color="#5cb85c"
+                        style={{ marginRight: "3%" }}
+                      />
+                    </div>
+                  </div>
                 </Link>
               </li>
             )}
             {isLoggedIn && (
               <li className="nav-item">
                 <Link className="nav-link" to="/profile">
-                  <b className="text-light">Profile</b>
+                  <b className="text-success">Profile</b>
                 </Link>
               </li>
             )}
             {isLoggedIn && isSalesman && isApproved && (
               <li className="nav-item">
                 <Link className="nav-link" to="/addArticle">
-                  <b className="text-light">Add Article</b>
+                  <b className="text-success">Articles</b>
                 </Link>
               </li>
             )}
             {isLoggedIn && isCustomer && (
               <li className="nav-item">
                 <Link className="nav-link" to="/newOrder">
-                  <b className="text-light">New Order</b>
+                  <b className="text-success">Add Order</b>
                 </Link>
               </li>
             )}
             {isLoggedIn && (isCustomer || isSalesman) && isApproved && (
               <li className="nav-item">
                 <Link className="nav-link" to="/previousOrders">
-                  <b className="text-light">Previous Orders</b>
+                  <b className="text-success">Previous Orders</b>
                 </Link>
               </li>
             )}
             {isLoggedIn && isAdmin && (
               <li className="nav-item">
                 <Link className="nav-link" to="/verification">
-                  <b className="text-light">Verification</b>
+                  <b className="text-success">Verifications</b>
                 </Link>
               </li>
             )}
             {isLoggedIn && (isCustomer || isSalesman) && isApproved && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/newOrders">
-                  <b className="text-light">New Orders</b>
-                </Link>
-              </li>
+              <Link className="nav-link" to="/newOrders">
+                <b className="text-success">New Orders</b>
+              </Link>
             )}
             {isLoggedIn && isAdmin && (
               <li className="nav-item">
                 <Link className="nav-link" to="/allOrders">
-                  <b className="text-light">All Orders</b>
+                  <b className="text-success">Orders</b>
                 </Link>
               </li>
             )}
@@ -150,7 +172,7 @@ const Layout = () => {
               {isLoggedIn && (
                 <li className="nav-item">
                   <Link className="nav-link" to="/login" onClick={logOut}>
-                    <b className="text-light">Log Out</b>
+                    <b className="text-success">Log Out</b>
                   </Link>
                 </li>
               )}

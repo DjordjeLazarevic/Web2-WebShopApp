@@ -4,7 +4,7 @@ import OrderDTO from "../../DTO/OrderDTO";
 import { CanceledError } from "../../services/api-client";
 import authGuardService from "../../services/auth-guard-service";
 import { orderHelpService } from "../../services/order-service";
-import Orders from "../Orders";
+import Orders from "../Order/Orders";
 
 const PreviousOrders = () => {
   const [orders, setOrders] = useState<OrderDTO[]>([]);
