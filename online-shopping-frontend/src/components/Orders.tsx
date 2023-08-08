@@ -1,6 +1,7 @@
 import { useState } from "react";
 import OrderDTO from "../DTO/OrderDTO";
 import Articles from "./Articles";
+import Alert from "./Alert";
 
 interface Props {
   orders: OrderDTO[];
@@ -14,14 +15,14 @@ const Orders = ({ orders, cancelOrder, ordersType }: Props) => {
   const isCancellable = (date: string) => {
     const newDate = new Date(date);
     newDate.setHours(newDate.getHours() + 1);
-    if (new Date() < newDate && localStorage.getItem("role") !== "Admin") {
+    if (new Date() < newDate && localStorage.getItem("role") === "Customer") {
       return true;
     } else {
       return false;
     }
   };
 
-  const isDelivered = (date: string) => {
+  let isDelivered = (date: string) => {
     const newDate = new Date(date);
     if (new Date() > newDate) {
       return true;
@@ -101,12 +102,17 @@ const Orders = ({ orders, cancelOrder, ordersType }: Props) => {
                       Address: {order.address} {" - Price: $"}
                       {order.price}
                     </p>
-                    {order.status === "Cancelled" && <p>{order.status}</p>}
+                    {order.status === "Cancelled" && (
+                      <Alert color="alert-danger" status={order.status} />
+                    )}
                     {order.status === "Processing" &&
-                      !isDelivered(order.endTime) && <p>{order.status}</p>}
+                      isDelivered(order.endTime) && (
+                        <Alert color="alert-success" status={"Delivered"} />
+                      )}
                     {order.status === "Processing" &&
-                      isDelivered(order.endTime) && <p>Delivered</p>}
-
+                      !isDelivered(order.endTime) && (
+                        <Alert color="alert-warning" status={order.status} />
+                      )}
                     {isCancellable(order.startTime) && (
                       <p>
                         <button

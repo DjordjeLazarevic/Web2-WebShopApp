@@ -11,20 +11,24 @@ using WebShopApp_Business.Service;
 using System.Linq;
 using System.Xml.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace WebShopApp.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class UserController : ControllerBase
     {
         private readonly IJwtUtils _jwtUtils;
         private readonly IUserService _userService;
+        private readonly IConfiguration _config;
 
-        public UserController(IUserService userService, IJwtUtils jwtUtils)
+        public UserController(IUserService userService, IJwtUtils jwtUtils, IConfiguration config)
         {
             _userService = userService;
             _jwtUtils = jwtUtils;
+            _config = config;
         }
 
         [AllowAnonymous]
@@ -77,14 +81,14 @@ namespace WebShopApp.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Role.Admin)]
+        [Authorize(Role.Admin)]
         public List<UserDTO> GetAll()
         {
             return DTOMapper.List_User_to_UserDTO(_userService.GetAllUsers().ToList());
         }
 
         [HttpGet("[action]")]
-        //[Authorize(Role.Admin)]
+        [Authorize(Role.Admin)]
         public List<UserDTO> Verifications()
         {
             return DTOMapper.List_User_to_UserDTO(_userService.GetAllUsers().Where(u => u.Role == Role.Salesman).ToList());
@@ -109,21 +113,22 @@ namespace WebShopApp.Controllers
         }
 
         [HttpPut("[action]/{id}")]
-        [AllowAnonymous]
+        [Authorize(Role.Admin)]
         public async Task<IActionResult> Approve(int id)
         {
             User user = _userService.GetUser(id);
             if (user != null) {
                 user.Status = VerificationStatus.Approved;
                 _userService.Update(user);
-                EmailService.SendApproveEmail(user.Email);
+                EmailService emailService = new EmailService(_config);
+                emailService.SendApproveEmail(user.Email);
                 return Ok(true);
             }
             return BadRequest(false);
         }
 
         [HttpPut("[action]/{id}")]
-        [AllowAnonymous]
+        [Authorize(Role.Admin)]
         public IActionResult Reject(int id)
         {
             User user = _userService.GetUser(id);
@@ -131,14 +136,14 @@ namespace WebShopApp.Controllers
             {
                 user.Status = VerificationStatus.Denied;
                 _userService.Update(user);
-                EmailService.SendRejectEmail(user.Email);
+                EmailService emailService = new EmailService(_config);
+                emailService.SendApproveEmail(user.Email);
                 return Ok(true);
             }
             return BadRequest(false);
         }
 
         [HttpPut]
-        [AllowAnonymous]
         public IActionResult Update(UpdateUserDTO user)
         {
             User u;
@@ -154,8 +159,13 @@ namespace WebShopApp.Controllers
                 u.DateOfBirth = user.DateOfBirth;
                 u.Image = user.Image;
                 if (user.Password != "")
+                {
                     u.Password = user.Password;
-                _userService.Update(u);
+                    _userService.Update(u);
+                }
+                else {
+                    _userService.UpdateNoPassword(u);
+                }
                 return Ok(DTOMapper.User_To_UserDTO(u));
             }
             catch 
