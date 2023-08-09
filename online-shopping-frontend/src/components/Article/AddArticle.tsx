@@ -7,6 +7,7 @@ import articleService from "../../services/article-service";
 import Swal from "sweetalert2";
 import authGuardService from "../../services/auth-guard-service";
 import { useNavigate } from "react-router-dom";
+import { RiArticleFill } from "react-icons/ri";
 
 const AddArticle = () => {
   let [articles, setArticles] = useState<ArticleDTO[]>([]);
@@ -284,21 +285,29 @@ const AddArticle = () => {
         <div className="row">
           <div className="col-sm-3"></div>
           <div className="col-sm-6">
-            <h1>Articles</h1>
+            <h1 style={{ color: "#198754" }}>
+              Articles
+              <RiArticleFill
+                size="6%"
+                color="#198754"
+                style={{ marginLeft: "2%" }}
+              />
+            </h1>
           </div>
           <div className="col-sm-3">
             <button
               type="button"
-              className="btn btn-lg btn-primary"
+              className="btn btn-lg btn-dark"
               data-bs-toggle="modal"
               data-bs-target="#newModal"
               id="new"
+              style={{ width: "35%" }}
             >
-              New Article
+              <MdOutlineAddCircle size="40" color="#198754" />
             </button>
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn btn-dark"
               data-bs-toggle="modal"
               data-bs-target="#editModal"
               id="edit"
@@ -324,7 +333,7 @@ const AddArticle = () => {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <MdOutlineAddCircle size="10%" color="#0D6EFD" />
+              <MdOutlineAddCircle size="10%" color="#198754" />
               <h1 style={{ marginLeft: "3%" }} className="modal-title fs-5">
                 New Article
               </h1>
@@ -454,7 +463,7 @@ const AddArticle = () => {
                           style={{
                             marginTop: "3%",
                             borderRadius: "5%",
-                            borderColor: "#0D6EFD",
+                            borderColor: "#198754",
                             borderStyle: "solid",
                           }}
                           id="image"
@@ -474,7 +483,7 @@ const AddArticle = () => {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-dark"
                 data-bs-dismiss="modal"
               >
                 Close
@@ -482,7 +491,7 @@ const AddArticle = () => {
               <button
                 type="submit"
                 onClick={handleAddSubmit}
-                className="btn btn-primary"
+                className="btn btn-success"
               >
                 Add Article
               </button>
@@ -500,7 +509,7 @@ const AddArticle = () => {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <RiEditCircleFill size="10%" color="#0D6EFD" />
+              <RiEditCircleFill size="10%" color="#198754" />
               <h1 style={{ marginLeft: "3%" }} className="modal-title fs-5">
                 Edit Article
               </h1>
@@ -629,7 +638,7 @@ const AddArticle = () => {
                           style={{
                             marginTop: "3%",
                             borderRadius: "5%",
-                            borderColor: "#0D6EFD",
+                            borderColor: "#198754",
                             borderStyle: "solid",
                           }}
                           id="image"
@@ -649,7 +658,7 @@ const AddArticle = () => {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-dark"
                 data-bs-dismiss="modal"
                 id="editClose"
               >
@@ -657,7 +666,7 @@ const AddArticle = () => {
               </button>
               <button
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-success"
                 onClick={handleEditSubmit}
               >
                 Edit Article

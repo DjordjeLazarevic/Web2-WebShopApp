@@ -5,6 +5,7 @@ import Alert from "../Alert";
 import Swal from "sweetalert2";
 import authGuardService from "../../services/auth-guard-service";
 import { useNavigate } from "react-router-dom";
+import { FaUserAlt } from "react-icons/fa";
 
 interface VerificationRequest {
   id: number;
@@ -134,50 +135,58 @@ const Verification = () => {
           <br />
           <div className="row">
             <div className="col-sm-4">
-              <h1>Verification</h1>
+              <h1 style={{ color: "#198754" }}>
+                Verifications
+                <FaUserAlt
+                  size="10%"
+                  color="#198754"
+                  style={{ marginLeft: "3%" }}
+                />
+              </h1>
             </div>
-            <div className="col-sm-2">
-              <button
-                type="button"
-                onClick={filterAll}
-                className="btn btn-primary"
+            <div className="col-sm-1"></div>
+            <div className="col-sm-7">
+              <div
+                className="btn-group"
+                role="group"
+                aria-label="Basic example"
               >
-                All Requests
-              </button>
-            </div>
-            <div className="col-sm-2">
-              <button
-                type="button"
-                onClick={filterPending}
-                className="btn btn-warning"
-              >
-                Pending Requests
-              </button>
-            </div>
-            <div className="col-sm-2">
-              <button
-                type="button"
-                onClick={filterApproved}
-                className="btn btn-success"
-              >
-                Approved Requests
-              </button>
-            </div>
-            <div className="col-sm-2">
-              <button
-                type="button"
-                onClick={filterRejected}
-                className="btn btn-danger"
-              >
-                Rejected Requests
-              </button>
+                <button
+                  type="button"
+                  onClick={filterAll}
+                  className="btn btn-outline-success btn-lg"
+                >
+                  All Requests
+                </button>
+                <button
+                  type="button"
+                  onClick={filterPending}
+                  className="btn btn-outline-success btn-lg"
+                >
+                  New Requests
+                </button>
+                <button
+                  type="button"
+                  onClick={filterApproved}
+                  className="btn btn-outline-success btn-lg"
+                >
+                  Approved Requests
+                </button>
+                <button
+                  type="button"
+                  onClick={filterRejected}
+                  className="btn btn-outline-success btn-lg"
+                >
+                  Rejected Requests
+                </button>
+              </div>
             </div>
           </div>
           <br />
         </div>
         <table
-          style={{ marginTop: "1%" }}
-          className="table text-center align-middle table-hover table-bordered border-primary table-light table-striped"
+          style={{ marginTop: "1%", borderStyle: "solid" }}
+          className="table text-center table-dark align-middle table-hover table-borderless table-striped"
         >
           <thead>
             <tr>
@@ -221,7 +230,7 @@ const Verification = () => {
                       <button
                         style={{ marginLeft: "10%" }}
                         onClick={() => reject(verificationRequest.id)}
-                        className="btn btn-danger"
+                        className="btn btn-secondary"
                       >
                         Reject
                       </button>

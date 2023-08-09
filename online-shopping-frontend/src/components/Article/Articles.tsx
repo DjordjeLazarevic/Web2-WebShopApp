@@ -1,5 +1,8 @@
 import { useState } from "react";
-import ArticleDTO from "../DTO/ArticleDTO";
+import ArticleDTO from "../../DTO/ArticleDTO";
+import { AiFillPlusCircle } from "react-icons/ai";
+import { RiEditCircleFill } from "react-icons/ri";
+import { BsFillXCircleFill } from "react-icons/bs";
 
 interface Props {
   articles: ArticleDTO[];
@@ -28,7 +31,14 @@ const Articles = ({
               className="col-md-3"
               style={{ marginBottom: "3%" }}
             >
-              <div className="card text-white bg-primary">
+              <div
+                className="card text-white bg-success"
+                style={{
+                  borderStyle: "solid",
+                  borderWidth: "medium",
+                  borderColor: "#343a40",
+                }}
+              >
                 <img
                   src={article.image}
                   style={{ aspectRatio: "4/3" }}
@@ -37,30 +47,37 @@ const Articles = ({
                 />
                 <div className="card-body">
                   <h5 className="card-title">{article.name}</h5>
-                  <p className="card-text">{article.description}</p>
                 </div>
                 <ul className="list-group list-group-flush">
-                  <li className="list-group-item text-white bg-primary">
-                    Quantity: {article.quantity}
+                  <li
+                    className="list-group-item text-white bg-success"
+                    style={{ minHeight: "100px", maxHeight: "150px" }}
+                  >
+                    Info: {article.description}
                   </li>
-                  <li className="list-group-item text-white bg-primary">
-                    Price: ${article.price}{" "}
+                  <li className="list-group-item text-white bg-success">
+                    <div className="row">
+                      <div className="col-sm-6">
+                        Quantity: {article.quantity}
+                      </div>
+                      <div className="col-sm-6"> Price: ${article.price} </div>
+                    </div>
                   </li>
                 </ul>
                 {articleButtons === "edit-delete" && (
                   <div className="card-body">
                     <button
-                      className="btn btn-light"
+                      className="btn btn-dark"
                       onClick={() => editArticle?.(article.id)}
                     >
-                      Edit
+                      <RiEditCircleFill size="40" color="#198754" />
                     </button>
                     <button
-                      className="btn btn-danger"
-                      style={{ marginLeft: "15%" }}
+                      className="btn btn-dark"
+                      style={{ marginLeft: "22%" }}
                       onClick={() => deleteArticle?.(article.id)}
                     >
-                      Delete
+                      <BsFillXCircleFill size="40" color="#198754" />
                     </button>
                   </div>
                 )}
@@ -79,7 +96,7 @@ const Articles = ({
                       </div>
                       <div className="col-sm-6">
                         <button
-                          className="btn btn-light"
+                          className="btn btn-dark"
                           onClick={() =>
                             addToCart?.(
                               article.id,
@@ -91,7 +108,7 @@ const Articles = ({
                           }
                           style={{ marginLeft: "10%" }}
                         >
-                          Add To Cart
+                          <AiFillPlusCircle size="25" color="#198754" />
                         </button>
                       </div>
                     </div>

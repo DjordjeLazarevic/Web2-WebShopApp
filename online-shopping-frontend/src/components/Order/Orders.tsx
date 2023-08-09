@@ -1,16 +1,32 @@
+import { useState } from "react";
 import OrderDTO from "../../DTO/OrderDTO";
 import Articles from "../Article/Articles";
+import Alert from "../Alert";
+import { RiArticleFill } from "react-icons/ri";
+import { BsBoxSeam } from "react-icons/bs";
 
 interface Props {
   orders: OrderDTO[];
-  cancelOrder: (id: number) => void;
+  cancelOrder?: (id: number) => void;
+  ordersType: "new" | "previous" | "all";
 }
 
-const Orders = ({ orders, cancelOrder }: Props) => {
+const Orders = ({ orders, cancelOrder, ordersType }: Props) => {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+
   const isCancellable = (date: string) => {
     const newDate = new Date(date);
     newDate.setHours(newDate.getHours() + 1);
-    if (new Date() < newDate) {
+    if (new Date() < newDate && localStorage.getItem("role") === "Customer") {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  let isDelivered = (date: string) => {
+    const newDate = new Date(date);
+    if (new Date() > newDate) {
       return true;
     } else {
       return false;
@@ -24,7 +40,36 @@ const Orders = ({ orders, cancelOrder }: Props) => {
         <div className="row">
           <div className="col-sm-3">
             <div className="container-fluid">
-              <h3>Orders</h3>
+              {ordersType === "new" && (
+                <h3 style={{ color: "#198754" }}>
+                  New Orders
+                  <BsBoxSeam
+                    size="9.8%"
+                    color="#198754"
+                    style={{ marginLeft: "2%" }}
+                  />
+                </h3>
+              )}
+              {ordersType === "previous" && (
+                <h3 style={{ color: "#198754" }}>
+                  Previous Orders
+                  <BsBoxSeam
+                    size="9.8%"
+                    color="#198754"
+                    style={{ marginLeft: "2%" }}
+                  />
+                </h3>
+              )}
+              {ordersType === "all" && (
+                <h3 style={{ color: "#198754" }}>
+                  Orders
+                  <BsBoxSeam
+                    size="9.8%"
+                    color="#198754"
+                    style={{ marginLeft: "2%" }}
+                  />
+                </h3>
+              )}
               <hr />
               <div
                 id="list-example"
@@ -33,8 +78,17 @@ const Orders = ({ orders, cancelOrder }: Props) => {
               >
                 {orders.map((order) => (
                   <a
+                    style={{ color: "white" }}
+                    id={order.id.toString()}
                     key={order.id}
-                    className="list-group-item list-group-item-action"
+                    className={
+                      selectedIndex === order.id
+                        ? "list-group-item bg-success"
+                        : "list-group-item bg-secondary"
+                    }
+                    onClick={() => {
+                      setSelectedIndex(order.id);
+                    }}
                     href={"#list-item-" + order.id}
                   >
                     <p>
@@ -55,7 +109,14 @@ const Orders = ({ orders, cancelOrder }: Props) => {
             </div>
           </div>
           <div className="col-sm-9 text-center">
-            <h3>Order Articles</h3>
+            <h3 style={{ color: "#198754" }}>
+              Order's Articles
+              <RiArticleFill
+                size="3%"
+                color="#198754"
+                style={{ marginLeft: "2%" }}
+              />
+            </h3>
             <hr />
             <div
               data-bs-spy="scroll"
@@ -79,15 +140,25 @@ const Orders = ({ orders, cancelOrder }: Props) => {
                       Address: {order.address} {" - Price: $"}
                       {order.price}
                     </p>
-                    {order.status}
+                    {order.status === "Cancelled" && (
+                      <Alert color="alert-danger" status={order.status} />
+                    )}
+                    {order.status === "Processing" &&
+                      isDelivered(order.endTime) && (
+                        <Alert color="alert-success" status={"Delivered"} />
+                      )}
+                    {order.status === "Processing" &&
+                      !isDelivered(order.endTime) && (
+                        <Alert color="alert-warning" status={order.status} />
+                      )}
                     {isCancellable(order.startTime) && (
                       <p>
                         <button
-                          className="btn btn-lg btn-danger"
+                          className="btn btn-lg btn-dark"
                           style={{ marginTop: "2%" }}
                           onClick={() => cancelOrder(order.id)}
                         >
-                          Cancel Order
+                          Cancel
                         </button>
                       </p>
                     )}

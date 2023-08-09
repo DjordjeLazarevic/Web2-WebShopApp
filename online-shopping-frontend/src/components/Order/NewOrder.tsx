@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import ArticleDTO from "../../DTO/ArticleDTO";
 import Articles from "../Article/Articles";
-import { BsFillCartFill } from "react-icons/bs";
+import { ImCart } from "react-icons/im";
+import { BsFillFileEarmarkPlusFill, BsFillXCircleFill } from "react-icons/bs";
 import Order from "../../model/Order";
 import orderService from "../../services/order-service";
 import { useNavigate } from "react-router-dom";
@@ -159,18 +160,27 @@ const NewOrder = () => {
         <div className="row">
           <div className="col-sm-3"></div>
           <div className="col-sm-6">
-            <h1>New Order</h1>
+            <b>
+              <h1 style={{ color: "#198754" }}>
+                New Order
+                <BsFillFileEarmarkPlusFill
+                  size="6%"
+                  color="#198754"
+                  style={{ marginLeft: "3%" }}
+                />
+              </h1>
+            </b>
           </div>
           <br />
           <div className="col-sm-3">
             <button
-              className="btn btn-lg btn-primary position-relative"
+              className="btn btn-lg btn-dark position-relative"
               data-bs-toggle="modal"
               data-bs-target="#cart"
+              style={{ width: "35%" }}
             >
-              Cart
-              <BsFillCartFill style={{ marginBottom: "6%" }} />
-              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              <ImCart size="40" color="#198754" />
+              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
                 {cart.length}
                 <span className="visually-hidden">unread messages</span>
               </span>
@@ -193,8 +203,12 @@ const NewOrder = () => {
       >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">
+            <div className="modal-header bg-dark">
+              <h1
+                className="modal-title fs-5"
+                style={{ color: "white" }}
+                id="exampleModalLabel"
+              >
                 Cart
               </h1>
               <button
@@ -205,8 +219,8 @@ const NewOrder = () => {
                 id="cartClose"
               ></button>
             </div>
-            <div className="modal-body">
-              <table className="table text-center align-middle table-borderless table-striped">
+            <div className="modal-body bg-dark">
+              <table className="table text-center table-dark align-middle table-borderless table-striped">
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -228,7 +242,7 @@ const NewOrder = () => {
                           className="btn btn-danger"
                           onClick={() => removeFromCart(item.id)}
                         >
-                          Remove
+                          <BsFillXCircleFill size="30" />
                         </button>
                       </td>
                     </tr>
@@ -238,6 +252,7 @@ const NewOrder = () => {
               <div className="row">
                 <div className="col-sm-6">
                   <textarea
+                    style={{ color: "white" }}
                     value={order.comment}
                     onChange={(event) => {
                       setOrder({
@@ -246,12 +261,13 @@ const NewOrder = () => {
                       });
                     }}
                     id="comment"
-                    className="form-control"
+                    className="form-control bg-dark"
                     placeholder="Comment"
                   />
                 </div>
                 <div className="col-sm-6">
                   <textarea
+                    style={{ color: "white" }}
                     value={order.address}
                     onChange={(event) => {
                       setOrder({
@@ -260,19 +276,19 @@ const NewOrder = () => {
                       });
                     }}
                     id="address"
-                    className="form-control"
+                    className="form-control bg-dark"
                     placeholder="Address"
                   />
                 </div>
               </div>
             </div>
-            <div className="modal-footer">
-              <h4 style={{ marginRight: "12%" }}>
+            <div className="modal-footer bg-dark">
+              <h4 style={{ marginRight: "12%", color: "white" }}>
                 Total: $
                 {cart
                   .reduce((acc, item) => item.price * item.quantity + acc, 0)
                   .toFixed(2)}{" "}
-                + 20.00 (Delivery fee)
+                + $10.00 (Delivery)
               </h4>
               <button
                 type="button"
@@ -283,7 +299,7 @@ const NewOrder = () => {
               </button>
               <button
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-success"
                 onClick={submitOrder}
               >
                 Order

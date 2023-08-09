@@ -133,32 +133,127 @@ const Profile = () => {
     <>
       <div className="container-fluid text-center">
         <br />
+        <br />
+        <h1 style={{ color: "#198754" }}>
+          Profile
+          <FaUserAlt size="2.5%" color="#198754" style={{ marginLeft: "2%" }} />
+        </h1>
+        <br />
+        <br />
         <div className="row">
           <div className="col-sm-5">
-            <div className="container">
-              <div className="row">
-                <h1>
-                  Profile <FaUserAlt size="30%" color="#0D6EFD" />
-                </h1>
+            <br />
+            <div className="mb-5">
+              <div className="input-group">
+                <span className="input-group-text w-25" id="basic-addon3">
+                  Username
+                </span>
+                <input
+                  value={user.username}
+                  onChange={(event) =>
+                    setUser({ ...user, username: event.target.value })
+                  }
+                  id="username"
+                  type="text"
+                  className="form-control"
+                  placeholder="Username"
+                />
+              </div>
+              {editErrors.username && (
+                <p className="text-danger">
+                  Username must contain at least 3 characters
+                </p>
+              )}
+            </div>
+            <div className="mb-5">
+              <div className="input-group">
+                <span className="input-group-text w-25" id="basic-addon3">
+                  Password
+                </span>
+                <input
+                  value={user.password}
+                  onChange={(event) =>
+                    setUser({ ...user, password: event.target.value })
+                  }
+                  id="password"
+                  type="password"
+                  className="form-control"
+                  placeholder="Password (leave empty if you don't want to change)"
+                />
+              </div>
+              {editErrors.password && (
+                <p className="text-danger">
+                  Password must contain at least 6 characters
+                </p>
+              )}
+            </div>
+            <div className="mb-5">
+              <div className="input-group">
+                <span className="input-group-text w-25" id="basic-addon3">
+                  Name
+                </span>
+                <input
+                  value={user.name}
+                  onChange={(event) =>
+                    setUser({ ...user, name: event.target.value })
+                  }
+                  id="name"
+                  type="text"
+                  className="form-control"
+                  placeholder="Name"
+                />
+              </div>
+              {editErrors.name && (
+                <p className="text-danger">Name is required</p>
+              )}
+            </div>
+
+            <div className="mb-5">
+              <div className="input-group">
+                <span className="input-group-text w-25" id="basic-addon3">
+                  Birth Date
+                </span>
+                <input
+                  value={user.dateOfBirth}
+                  onChange={(event) =>
+                    setUser({ ...user, dateOfBirth: event.target.value })
+                  }
+                  id="dateOfBirth"
+                  type="date"
+                  className="form-control"
+                />
+                {editErrors.dateOfBirth && (
+                  <p className="text-danger">Pick your birth date</p>
+                )}
               </div>
             </div>
-            <div className="mb-1">
-              <br />
-              {user.status === "Processing" && (
-                <Alert status={user.status} color="alert-warning" />
-              )}
-              {user.status === "Denied" && (
-                <Alert status={user.status} color="alert-danger" />
-              )}
-              {user.status === "Approved" && (
-                <Alert status={user.status} color="alert-success" />
+            <div className="mb-5">
+              <div className="input-group">
+                <span className="input-group-text w-25" id="basic-addon3">
+                  Address
+                </span>
+                <input
+                  value={user.address}
+                  onChange={(event) =>
+                    setUser({ ...user, address: event.target.value })
+                  }
+                  id="address"
+                  type="text"
+                  className="form-control"
+                  placeholder="Address"
+                />
+              </div>
+              {editErrors.address && (
+                <p className="text-danger">
+                  Address must contain at least 6 characters
+                </p>
               )}
             </div>
           </div>
           <div className="col-sm-2"></div>
           <div className="col-sm-5">
             <br />
-            <br />
+
             <img
               src={user.image}
               className="rounded mx-auto d-block"
@@ -166,125 +261,14 @@ const Profile = () => {
               height="300"
               width="300"
             ></img>
-          </div>
-        </div>
-        <br />
-        <div className="container-fluid text-center">
-          <div className="row">
-            <div className="col-sm-5">
-              <div className="mb-3">
-                <div className="input-group">
-                  <span className="input-group-text w-25" id="basic-addon3">
-                    Username
-                  </span>
-                  <input
-                    value={user.username}
-                    onChange={(event) =>
-                      setUser({ ...user, username: event.target.value })
-                    }
-                    id="username"
-                    type="text"
-                    className="form-control"
-                    placeholder="Username"
-                  />
-                </div>
-                {editErrors.username && (
-                  <p className="text-danger">
-                    Username must contain at least 3 characters
-                  </p>
-                )}
-              </div>
-              <div className="mb-3">
-                <div className="input-group">
-                  <span className="input-group-text w-25" id="basic-addon3">
-                    Password
-                  </span>
-                  <input
-                    value={user.password}
-                    onChange={(event) =>
-                      setUser({ ...user, password: event.target.value })
-                    }
-                    id="password"
-                    type="password"
-                    className="form-control"
-                    placeholder="Password (leave empty if you don't want to change)"
-                  />
-                </div>
-                {editErrors.password && (
-                  <p className="text-danger">
-                    Password must contain at least 6 characters
-                  </p>
-                )}
-              </div>
-              <div className="mb-3">
-                <div className="input-group">
-                  <span className="input-group-text w-25" id="basic-addon3">
-                    Name
-                  </span>
-                  <input
-                    value={user.name}
-                    onChange={(event) =>
-                      setUser({ ...user, name: event.target.value })
-                    }
-                    id="name"
-                    type="text"
-                    className="form-control"
-                    placeholder="Name"
-                  />
-                </div>
-                {editErrors.name && (
-                  <p className="text-danger">Name is required</p>
-                )}
-              </div>
+            <br />
+            <br />
 
-              <div className="mb-3">
-                <div className="input-group">
-                  <span className="input-group-text w-25" id="basic-addon3">
-                    Birth Date
-                  </span>
-                  <input
-                    value={user.dateOfBirth}
-                    onChange={(event) =>
-                      setUser({ ...user, dateOfBirth: event.target.value })
-                    }
-                    id="dateOfBirth"
-                    type="date"
-                    className="form-control"
-                  />
-                  {editErrors.dateOfBirth && (
-                    <p className="text-danger">Pick your birth date</p>
-                  )}
-                </div>
-              </div>
-              <div className="mb-3">
-                <div className="input-group">
-                  <span className="input-group-text w-25" id="basic-addon3">
-                    Address
-                  </span>
-                  <input
-                    value={user.address}
-                    onChange={(event) =>
-                      setUser({ ...user, address: event.target.value })
-                    }
-                    id="address"
-                    type="text"
-                    className="form-control"
-                    placeholder="Address"
-                  />
-                </div>
-                {editErrors.address && (
-                  <p className="text-danger">
-                    Address must contain at least 6 characters
-                  </p>
-                )}
-              </div>
-            </div>
-            <div className="col-sm-2"></div>
-            <div className="col-sm-5">
-              <div className="mb-3">
-                <label htmlFor="file" className="form-label">
-                  Profile Photo
-                </label>
+            <div className="mb-3">
+              <div className="input-group">
+                <span className="input-group-text w-25" id="basic-addon3">
+                  Photo
+                </span>
                 <input
                   className="form-control"
                   type="file"
@@ -294,18 +278,18 @@ const Profile = () => {
                 />
               </div>
             </div>
-            <div className="row">
-              <div className="col-sm-4"></div>
-              <div className="col-sm-4">
-                <button
-                  className="btn btn-lg btn-primary"
-                  onClick={handleSubmit}
-                >
-                  Save Changes
-                </button>
-              </div>
-              <div className="col-sm-4"></div>
+          </div>
+        </div>
+        <br />
+        <div className="container-fluid text-center">
+          <div className="row">
+            <div className="col-sm-4"></div>
+            <div className="col-sm-4">
+              <button className="btn btn-lg btn-success" onClick={handleSubmit}>
+                Save Changes
+              </button>
             </div>
+            <div className="col-sm-4"></div>
           </div>
         </div>
       </div>

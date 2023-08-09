@@ -1,7 +1,7 @@
 import { FieldValues, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RiLoginBoxFill } from "react-icons/ri";
+import { FaSignInAlt } from "react-icons/fa";
 import authService from "../../services/authentication-service";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
@@ -86,46 +86,68 @@ const Login = () => {
         <div className="container text-center">
           <br />
           <br />
-          <h1>Log In</h1>
-          <RiLoginBoxFill size="25%" color="#0D6EFD" />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <div className="container-fluid text-center">
+            <h1 style={{ color: "#198754" }}>
+              Log In
+              <FaSignInAlt
+                size="5%"
+                color="#198754"
+                style={{ marginLeft: "2%" }}
+              />
+            </h1>
+          </div>
+          <br />
+          <br />
+          <br />
         </div>
         <div className="container">
           <div className="row">
             <div className="col-sm-3"></div>
             <div className="col-sm-6">
               <div className="mb-3 text-center">
-                <label htmlFor="email" className="form-label">
-                  <h3>E-mail</h3>
-                </label>
-                <input
-                  {...register("email")}
-                  id="email"
-                  placeholder="E-mail"
-                  type="email"
-                  className="form-control"
-                />
+                <div className="input-group">
+                  <span className="input-group-text w-25" id="basic-addon3">
+                    E-mail
+                  </span>
+                  <input
+                    {...register("email")}
+                    id="email"
+                    placeholder="E-mail"
+                    type="email"
+                    className="form-control"
+                  />
+                </div>
                 {errors.email && (
                   <p className="text-danger">{errors.email.message}</p>
                 )}
               </div>
               <div className="mb-3 text-center">
-                <label htmlFor="password" className="form-label">
-                  <h3>Password</h3>
-                </label>
-                <input
-                  {...register("password")}
-                  id="password"
-                  placeholder="Password"
-                  type="password"
-                  className="form-control"
-                />
+                <div className="input-group">
+                  <span className="input-group-text w-25" id="basic-addon3">
+                    Password
+                  </span>
+                  <input
+                    {...register("password")}
+                    id="password"
+                    placeholder="Password"
+                    type="password"
+                    className="form-control"
+                  />
+                </div>
                 {errors.password && (
                   <p className="text-danger">{errors.password.message}</p>
                 )}
               </div>
               <br />
               <div className="text-center">
-                <button type="submit" className="btn btn-primary btn-lg">
+                <button type="submit" className="btn btn-success btn-lg">
                   Log In
                 </button>
               </div>

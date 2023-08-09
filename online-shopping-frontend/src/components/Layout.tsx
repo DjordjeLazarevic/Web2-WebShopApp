@@ -77,7 +77,7 @@ const Layout = () => {
 
   return (
     <>
-      <nav className="navbar sticky-top navbar-expand-sm bg-body-tertiary navbar-dark bg-dark">
+      <nav className="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
         <div
           className="collapse navbar-collapse"
           id="navbarNavDropdown"
@@ -86,80 +86,140 @@ const Layout = () => {
           <ul className="navbar-nav text-center">
             {!isLoggedIn && (
               <li className="nav-item">
-                <Link className="nav-link" to="/">
-                  <div className="row">
-                    <div className="col">
-                      <b className="text-light">Registration</b>
-                    </div>
-                    <div className="col">
-                      <FaUserPlus size="25" color="#5cb85c" />
-                    </div>
-                  </div>
+                <Link
+                  className="nav-link"
+                  to="/"
+                  style={{
+                    borderRightStyle: "solid",
+                    borderRightWidth: "thick",
+                    borderRightColor: "#198754",
+                    borderLeftStyle: "solid",
+                    borderLeftWidth: "thick",
+                    borderLeftColor: "#198754",
+                  }}
+                >
+                  <b className="text-success">REGISTRATION</b>
                 </Link>
               </li>
             )}
             {!isLoggedIn && (
               <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  <div className="row">
-                    <div className="col">
-                      <b className="text-light">Login</b>
-                    </div>
-                    <div className="col">
-                      <RiLoginBoxFill
-                        size="25"
-                        color="#5cb85c"
-                        style={{ marginRight: "3%" }}
-                      />
-                    </div>
-                  </div>
+                <Link
+                  className="nav-link"
+                  to="/login"
+                  style={{
+                    borderRightStyle: "solid",
+                    borderRightWidth: "thick",
+                    borderRightColor: "#198754",
+                  }}
+                >
+                  <b className="text-success">LOG IN</b>
                 </Link>
               </li>
             )}
             {isLoggedIn && (
               <li className="nav-item">
-                <Link className="nav-link" to="/profile">
-                  <b className="text-success">Profile</b>
+                <Link
+                  className="nav-link"
+                  to="/profile"
+                  style={{
+                    borderRightStyle: "solid",
+                    borderRightWidth: "thick",
+                    borderRightColor: "#198754",
+                    borderLeftStyle: "solid",
+                    borderLeftWidth: "thick",
+                    borderLeftColor: "#198754",
+                  }}
+                >
+                  <b className="text-success">PROFILE</b>
                 </Link>
               </li>
             )}
             {isLoggedIn && isSalesman && isApproved && (
               <li className="nav-item">
-                <Link className="nav-link" to="/addArticle">
-                  <b className="text-success">Articles</b>
+                <Link
+                  className="nav-link"
+                  to="/addArticle"
+                  style={{
+                    borderRightStyle: "solid",
+                    borderRightWidth: "thick",
+                    borderRightColor: "#198754",
+                  }}
+                >
+                  <b className="text-success">ARTICLES</b>
                 </Link>
               </li>
             )}
             {isLoggedIn && isCustomer && (
               <li className="nav-item">
-                <Link className="nav-link" to="/newOrder">
-                  <b className="text-success">Add Order</b>
+                <Link
+                  className="nav-link"
+                  to="/newOrder"
+                  style={{
+                    borderRightStyle: "solid",
+                    borderRightWidth: "thick",
+                    borderRightColor: "#198754",
+                  }}
+                >
+                  <b className="text-success">ADD ORDER</b>
                 </Link>
               </li>
             )}
             {isLoggedIn && (isCustomer || isSalesman) && isApproved && (
               <li className="nav-item">
-                <Link className="nav-link" to="/previousOrders">
-                  <b className="text-success">Previous Orders</b>
+                <Link
+                  className="nav-link"
+                  to="/previousOrders"
+                  style={{
+                    borderRightStyle: "solid",
+                    borderRightWidth: "thick",
+                    borderRightColor: "#198754",
+                  }}
+                >
+                  <b className="text-success">PREVIOUS ORDERS</b>
                 </Link>
               </li>
             )}
             {isLoggedIn && isAdmin && (
               <li className="nav-item">
-                <Link className="nav-link" to="/verification">
-                  <b className="text-success">Verifications</b>
+                <Link
+                  className="nav-link"
+                  to="/verification"
+                  style={{
+                    borderRightStyle: "solid",
+                    borderRightWidth: "thick",
+                    borderRightColor: "#198754",
+                  }}
+                >
+                  <b className="text-success">VERIFICATIONS</b>
                 </Link>
               </li>
             )}
             {isLoggedIn && (isCustomer || isSalesman) && isApproved && (
-              <Link className="nav-link" to="/newOrders">
-                <b className="text-success">New Orders</b>
+              <Link
+                className="nav-link"
+                to="/newOrders"
+                style={{
+                  borderRightStyle: "solid",
+                  borderRightWidth: "thick",
+                  borderRightColor: "#198754",
+                }}
+              >
+                <b className="text-success">NEW ORDERS</b>
               </Link>
             )}
             {isLoggedIn && isAdmin && (
               <li className="nav-item">
-                <Link className="nav-link" to="/allOrders">
-                  <b className="text-success">Orders</b>
+                <Link
+                  className="nav-link"
+                  to="/allOrders"
+                  style={{
+                    borderRightStyle: "solid",
+                    borderRightWidth: "thick",
+                    borderRightColor: "#198754",
+                  }}
+                >
+                  <b className="text-success">ORDERS</b>
                 </Link>
               </li>
             )}
@@ -171,8 +231,20 @@ const Layout = () => {
             <ul className="navbar-nav justify-content-end">
               {isLoggedIn && (
                 <li className="nav-item">
-                  <Link className="nav-link" to="/login" onClick={logOut}>
-                    <b className="text-success">Log Out</b>
+                  <Link
+                    className="nav-link"
+                    to="/login"
+                    onClick={logOut}
+                    style={{
+                      borderRightStyle: "solid",
+                      borderRightWidth: "thick",
+                      borderRightColor: "#198754",
+                      borderLeftStyle: "solid",
+                      borderLeftWidth: "thick",
+                      borderLeftColor: "#198754",
+                    }}
+                  >
+                    <b className="text-success">LOG OUT</b>
                   </Link>
                 </li>
               )}
