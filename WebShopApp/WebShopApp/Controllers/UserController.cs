@@ -68,7 +68,7 @@ namespace WebShopApp.Controllers
                         VerificationStatus.Approved
                         ));
                     user = _userService.GetByEmail(info.Email);
-                    return Ok(new LoginResponseDTO(user, info.Token));
+                    return Ok(new LoginResponseDTO(user, _jwtUtils.GenerateJwtToken(user)));
                 }
                 // authentication successful so generate jwt token
                 var jwtToken = _jwtUtils.GenerateJwtToken(user);

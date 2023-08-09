@@ -252,8 +252,15 @@ const Profile = () => {
           </div>
           <div className="col-sm-2"></div>
           <div className="col-sm-5">
-            <br />
-
+            {user.status === "Denied" && (
+              <Alert color="alert-danger" status={user.status} />
+            )}
+            {user.status === "Approved" && (
+              <Alert color="alert-success" status={user.status} />
+            )}
+            {user.status === "Processing" && (
+              <Alert color="alert-warning" status={user.status} />
+            )}
             <img
               src={user.image}
               className="rounded mx-auto d-block"

@@ -178,7 +178,13 @@ const Login = () => {
                 });
               }}
             >
-              <GoogleLoginButton />
+              <GoogleLoginButton
+                style={{
+                  borderStyle: "solid",
+                  borderWidth: "3px",
+                  borderColor: "#198754",
+                }}
+              />
             </LoginSocialGoogle>
           </div>
           <div className="col-sm-4"></div>

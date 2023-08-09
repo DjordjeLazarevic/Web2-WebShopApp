@@ -6,6 +6,7 @@ import userService from "../../services/user-service";
 import { useNavigate } from "react-router-dom";
 import authGuardService from "../../services/auth-guard-service";
 import Swal from "sweetalert2";
+import { FaUserPlus } from "react-icons/fa";
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -150,214 +151,258 @@ const Registration = () => {
           <div className="col-sm-10">
             <div className="container">
               <br />
-              <h1>Register</h1>
               <br />
 
-              <RiFileUserFill size="20%" color="#0D6EFD" />
+              <h1 style={{ color: "#198754" }}>
+                Register
+                <FaUserPlus
+                  size="5%"
+                  color="#198754"
+                  style={{ marginLeft: "2%" }}
+                />
+              </h1>
+              <br />
+              <br />
+              <br />
             </div>
             <div className="row">
               <div className="col-sm-5">
-                <div className="mb-1">
-                  <label htmlFor="username" className="form-label">
-                    Username
-                  </label>
-                  <input
-                    value={registerInfo.username}
-                    onChange={(event) => {
-                      setRegisterInfo({
-                        ...registerInfo,
-                        username: event.target.value,
-                      });
-                    }}
-                    id="username"
-                    type="text"
-                    className="form-control"
-                    placeholder="Username"
-                  />
+                <div className="mb-3">
+                  <div className="input-group">
+                    <span className="input-group-text w-25" id="basic-addon3">
+                      Username
+                    </span>
+                    <input
+                      value={registerInfo.username}
+                      onChange={(event) => {
+                        setRegisterInfo({
+                          ...registerInfo,
+                          username: event.target.value,
+                        });
+                      }}
+                      id="username"
+                      type="text"
+                      className="form-control"
+                      placeholder="Username"
+                    />
+                  </div>
                   {registerErrors.username && (
                     <p className="text-danger">
                       Username must contain at least 3 characters
                     </p>
                   )}
                 </div>
-                <div className="mb-1">
-                  <label htmlFor="email" className="form-label">
-                    E-mail
-                  </label>
-                  <input
-                    value={registerInfo.email}
-                    onChange={(event) => {
-                      setRegisterInfo({
-                        ...registerInfo,
-                        email: event.target.value,
-                      });
-                    }}
-                    id="email"
-                    type="email"
-                    className="form-control"
-                    placeholder="E-mail"
-                  />
+                <div className="mb-3">
+                  <div className="input-group">
+                    <span className="input-group-text w-25" id="basic-addon3">
+                      E-mail
+                    </span>
+                    <input
+                      value={registerInfo.email}
+                      onChange={(event) => {
+                        setRegisterInfo({
+                          ...registerInfo,
+                          email: event.target.value,
+                        });
+                      }}
+                      id="email"
+                      type="email"
+                      className="form-control"
+                      placeholder="E-mail"
+                    />
+                  </div>
                   {registerErrors.email && (
                     <p className="text-danger">E-mail is not valid</p>
                   )}
                 </div>
-                <div className="mb-1">
-                  <label htmlFor="password" className="form-label">
-                    Password
-                  </label>
-                  <input
-                    value={registerInfo.password}
-                    onChange={(event) => {
-                      setRegisterInfo({
-                        ...registerInfo,
-                        password: event.target.value.trim(),
-                      });
-                    }}
-                    id="password"
-                    type="password"
-                    className="form-control"
-                    placeholder="Password"
-                  />
+                <div className="mb-3">
+                  <div className="input-group">
+                    <span className="input-group-text w-25" id="basic-addon3">
+                      Password
+                    </span>
+                    <input
+                      value={registerInfo.password}
+                      onChange={(event) => {
+                        setRegisterInfo({
+                          ...registerInfo,
+                          password: event.target.value.trim(),
+                        });
+                      }}
+                      id="password"
+                      type="password"
+                      className="form-control"
+                      placeholder="Password"
+                    />
+                  </div>
                   {registerErrors.password && (
                     <p className="text-danger">
                       Password must contain at least 6 characters
                     </p>
                   )}
                 </div>
-                <div className="mb-1">
-                  <label htmlFor="confirmPassword" className="form-label">
-                    Confirm Password
-                  </label>
-                  <input
-                    value={registerInfo.confirmPassword}
-                    onChange={(event) => {
-                      setRegisterInfo({
-                        ...registerInfo,
-                        confirmPassword: event.target.value.trim(),
-                      });
-                    }}
-                    id="confirmPassword"
-                    type="password"
-                    className="form-control"
-                    placeholder="Confirm Password"
-                  />
+                <div className="mb-3">
+                  <div className="input-group">
+                    <span className="input-group-text w-25" id="basic-addon3">
+                      Confirm
+                    </span>
+                    <input
+                      value={registerInfo.confirmPassword}
+                      onChange={(event) => {
+                        setRegisterInfo({
+                          ...registerInfo,
+                          confirmPassword: event.target.value.trim(),
+                        });
+                      }}
+                      id="confirmPassword"
+                      type="password"
+                      className="form-control"
+                      placeholder="Confirm Password"
+                    />
+                  </div>
                   {registerErrors.confirmPassword && (
                     <p className="text-danger">Passwords don't match</p>
                   )}
                 </div>
-                <div className="mb-1">
-                  <label htmlFor="name" className="form-label">
-                    Name
-                  </label>
-                  <input
-                    value={registerInfo.name}
-                    onChange={(event) => {
-                      setRegisterInfo({
-                        ...registerInfo,
-                        name: event.target.value,
-                      });
-                    }}
-                    id="name"
-                    type="text"
-                    className="form-control"
-                    placeholder="Name"
-                  />
+                <div className="mb-3">
+                  <div className="input-group">
+                    <span className="input-group-text w-25" id="basic-addon3">
+                      Name
+                    </span>
+                    <input
+                      value={registerInfo.name}
+                      onChange={(event) => {
+                        setRegisterInfo({
+                          ...registerInfo,
+                          name: event.target.value,
+                        });
+                      }}
+                      id="name"
+                      type="text"
+                      className="form-control"
+                      placeholder="Name"
+                    />
+                  </div>
                   {registerErrors.name && (
                     <p className="text-danger">Name is required</p>
                   )}
                 </div>
-              </div>
-              <div className="col-sm-2"></div>
-              <div className="col-sm-5">
-                <div className="mb-1">
-                  <label htmlFor="dateOfBirth" className="form-label">
-                    Birth Date
-                  </label>
-                  <input
-                    value={registerInfo.dateOfBirth}
-                    onChange={(event) => {
-                      setRegisterInfo({
-                        ...registerInfo,
-                        dateOfBirth: event.target.value.trim(),
-                      });
-                    }}
-                    id="dateOfBirth"
-                    type="date"
-                    className="form-control"
-                  />
+                <div className="mb-3">
+                  <div className="input-group">
+                    <span className="input-group-text w-25" id="basic-addon3">
+                      Date of Birth
+                    </span>
+                    <input
+                      value={registerInfo.dateOfBirth}
+                      onChange={(event) => {
+                        setRegisterInfo({
+                          ...registerInfo,
+                          dateOfBirth: event.target.value.trim(),
+                        });
+                      }}
+                      id="dateOfBirth"
+                      type="date"
+                      className="form-control"
+                    />
+                  </div>
                   {registerErrors.dateOfBirth && (
                     <p className="text-danger">Date of birth is required</p>
                   )}
                 </div>
-                <div className="mb-1">
-                  <label htmlFor="address" className="form-label">
-                    Address
-                  </label>
-                  <input
-                    value={registerInfo.address}
-                    onChange={(event) => {
-                      setRegisterInfo({
-                        ...registerInfo,
-                        address: event.target.value,
-                      });
-                    }}
-                    id="address"
-                    type="text"
-                    className="form-control"
-                    placeholder="Address"
-                  />
+                <div className="mb-3">
+                  <div className="input-group">
+                    <span className="input-group-text w-25" id="basic-addon3">
+                      Address
+                    </span>
+                    <input
+                      value={registerInfo.address}
+                      onChange={(event) => {
+                        setRegisterInfo({
+                          ...registerInfo,
+                          address: event.target.value,
+                        });
+                      }}
+                      id="address"
+                      type="text"
+                      className="form-control"
+                      placeholder="Address"
+                    />
+                  </div>
                   {registerErrors.address && (
                     <p className="text-danger">
                       Address must contain at least 6 characters
                     </p>
                   )}
                 </div>
-                <div className="mb-1">
-                  <label htmlFor="type" className="form-label">
-                    Type
-                  </label>
-                  <select
-                    value={registerInfo.role}
-                    onChange={(event) => {
-                      setRegisterInfo({
-                        ...registerInfo,
-                        role: event.target.value.trim(),
-                      });
-                    }}
-                    className="form-select form-select mb-1"
-                    aria-label=".form-select example"
-                  >
-                    <option value="">Open this select menu</option>
-                    <option value="admin">Administrator</option>
-                    <option value="salesman">Salesman</option>
-                    <option value="customer">Customer</option>
-                  </select>
+                <div className="mb-3">
+                  <div className="input-group">
+                    <span className="input-group-text w-25" id="basic-addon3">
+                      Role
+                    </span>
+                    <select
+                      value={registerInfo.role}
+                      onChange={(event) => {
+                        setRegisterInfo({
+                          ...registerInfo,
+                          role: event.target.value.trim(),
+                        });
+                      }}
+                      className="form-select"
+                      aria-label=".form-select example"
+                    >
+                      <option value="">Open this select menu</option>
+                      <option value="admin">Administrator</option>
+                      <option value="salesman">Salesman</option>
+                      <option value="customer">Customer</option>
+                    </select>
+                  </div>
                   {registerErrors.role && (
                     <p className="text-danger">Pick a user role</p>
                   )}
                 </div>
-                <div className="mb-1">
-                  <label htmlFor="file" className="form-label">
-                    Profile Photo
-                  </label>
-                  <input
-                    className="form-control"
-                    type="file"
-                    id="file"
-                    accept="image/png, image/jpeg, image/gif"
-                    onChange={handleFileChange}
-                  />
+              </div>
+              <div className="col-sm-2"></div>
+              <div className="col-sm-5">
+                <br />
+                <img
+                  src={registerInfo.image}
+                  className="rounded mx-auto d-block"
+                  alt="IMAGE"
+                  height="300"
+                  width="300"
+                  style={{
+                    borderStyle: "solid",
+                    borderWidth: "5px",
+                    borderColor: "#198754",
+                  }}
+                ></img>
+                <br />
+                <br />
+                <div className="mb-3">
+                  <div className="input-group">
+                    <span className="input-group-text w-25" id="basic-addon3">
+                      Photo
+                    </span>
+                    <input
+                      className="form-control"
+                      type="file"
+                      id="file"
+                      accept="image/png, image/jpeg, image/gif"
+                      onChange={handleFileChange}
+                    />
+                  </div>
                   {registerErrors.image && (
                     <p className="text-danger">Upload your profile photo</p>
                   )}
                 </div>
                 <br />
-                <div className="mb-1">
+                <br />
+                <br />
+                <div className="mb-3">
                   <button
-                    className="btn btn-lg btn-primary"
+                    className="btn btn-lg btn-success"
                     onClick={handleSubmit}
                   >
-                    Submit
+                    Register
                   </button>
                 </div>
               </div>

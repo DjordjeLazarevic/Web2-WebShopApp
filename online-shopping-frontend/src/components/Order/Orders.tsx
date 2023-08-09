@@ -17,7 +17,7 @@ const Orders = ({ orders, cancelOrder, ordersType }: Props) => {
   const isCancellable = (date: string) => {
     const newDate = new Date(date);
     newDate.setHours(newDate.getHours() + 1);
-    if (new Date() < newDate && localStorage.getItem("role") === "Customer") {
+    if (new Date() < newDate && localStorage.getItem("role") === "Customer" && ordersType === 'new') {
       return true;
     } else {
       return false;
@@ -78,7 +78,12 @@ const Orders = ({ orders, cancelOrder, ordersType }: Props) => {
               >
                 {orders.map((order) => (
                   <a
-                    style={{ color: "white" }}
+                    style={{
+                      color: "white",
+                      borderStyle: "solid",
+                      borderColor: "#198754",
+                      borderWidth: "3px",
+                    }}
                     id={order.id.toString()}
                     key={order.id}
                     className={
@@ -91,16 +96,20 @@ const Orders = ({ orders, cancelOrder, ordersType }: Props) => {
                     }}
                     href={"#list-item-" + order.id}
                   >
+                    <p>Order #{order.id}</p>
+                    <hr />
+                    <p></p>
+                    <p>Customer: {order.customer.username}</p>
+                    <hr />
                     <p>
-                      Customer: {order.customer.name} -{" "}
-                      {order.customer.username}
+                      Order time: {order.startTime}
+                      <br /> Delivery time: {order.endTime}
                     </p>
+                    <hr />
                     <p>
-                      Creation time: {order.startTime} - Delivery time:{" "}
-                      {order.endTime}
-                    </p>
-                    <p>
-                      Address: {order.address} {" - Price: $"}
+                      Address: {order.address}
+                      <hr />
+                      {"Price: $"}
                       {order.price}
                     </p>
                   </a>
@@ -128,18 +137,58 @@ const Orders = ({ orders, cancelOrder, ordersType }: Props) => {
               {orders.map((order) => (
                 <div key={order.id}>
                   <h4 id={"list-item-" + order.id}>
-                    <p>
-                      Customer: {order.customer.name} -{" "}
-                      {order.customer.username}
-                    </p>
-                    <p>
-                      Creation time: {order.startTime} - Delivery time:{" "}
-                      {order.endTime}
-                    </p>
-                    <p>
-                      Address: {order.address} {" - Price: $"}
-                      {order.price}
-                    </p>
+                    <div className="accordion" id="accordionExample">
+                      <div className="accordion-item">
+                        <h2 className="accordion-header">
+                          <button
+                            className="accordion-button bg-dark"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne"
+                            aria-expanded="true"
+                            aria-controls="collapseOne"
+                            style={{
+                              color: "#198754",
+                            }}
+                          >
+                            Order # {order.id} - Click here for more information
+                            about an order
+                          </button>
+                        </h2>
+                        <div
+                          id="collapseOne"
+                          className="accordion-collapse collapse show"
+                          data-bs-parent="#accordionExample"
+                        >
+                          <div className="accordion-body bg-dark">
+                            <table className="table table-dark">
+                              <thead>
+                                <tr>
+                                  <th scope="col">Customer Name</th>
+                                  <th scope="col">Customer Username</th>
+                                  <th scope="col">Order Time</th>
+                                  <th scope="col">Delivery Time</th>
+                                  <th scope="col">Address</th>
+                                  <th scope="col">Price</th>
+                                  <th scope="col">Comment</th>
+                                </tr>
+                              </thead>
+                              <tbody className="table-group-divider">
+                                <tr>
+                                  <td>{order.customer.name}</td>
+                                  <td>{order.customer.username}</td>
+                                  <td>{order.startTime}</td>
+                                  <td>{order.endTime}</td>
+                                  <td>{order.address}</td>
+                                  <td>${order.price}</td>
+                                  <td>{order.comment}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     {order.status === "Cancelled" && (
                       <Alert color="alert-danger" status={order.status} />
                     )}
